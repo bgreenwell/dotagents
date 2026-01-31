@@ -36,12 +36,18 @@ This standard separates concerns into a router file and a context directory.
     ├── context/          # Static reference data (read-only)
     │   ├── schema.sql    # Database structure
     │   └── api.ts        # API interfaces
+    ├── logs/             # Agent activity logs & audit trails
+    │   └── session_1.md
     ├── memory/           # Persistent project knowledge (read/write)
     │   ├── decisions.md  # ADRs (why we chose X over Y)
     │   └── user.md       # Learned user preferences
-    ├── skills/           # Executable tools & scripts
-    │   ├── db_migrate.sh
-    │   └── test_suite.py
+    ├── personas/         # specialized agent profiles
+    │   └── qa.md         # e.g. "QA Engineer" hat
+    ├── skills/           # Executable capabilities (agentskills.io compliant)
+    │   └── database-migration/
+    │       ├── SKILL.md
+    │       └── scripts/
+    │           └── migrate.sh
     └── specs/            # Current task requirements
         └── feature_x.md
 ```
@@ -52,8 +58,8 @@ This standard separates concerns into a router file and a context directory.
 
 | Feature | Agent Skills (agentskills.io) | dotagents |
 | :--- | :--- | :--- |
-| **Primary Goal** | **Standardize Behavior.** Defines the `SKILL.md` format for specific workflows. | **Standardize Organization.** Defines a unified directory structure for all agent data. |
-| **Scope** | Narrow. Focuses strictly on executable "Skills". | Broad. Covers Skills, Memory, Specs, Architecture, and Rules. |
+| **Primary Goal** | **Standardize Behavior.** Defines the `SKILL.md` format (YAML+Markdown) for specific workflows. | **Standardize Organization.** Defines a unified directory structure for *all* agent data. |
+| **Scope** | **Skill-Local.** References are specific to the skill (e.g., `git-deploy/references/flags.md`). | **Project-Wide.** Context is global to the project (e.g., `.agents/context/schema.sql`). |
 | **Implementation** | **Vendor-Fragmented.** Often leads to duplication across `.claude/`, `.cursor/`, etc. | **Vendor-Agnostic.** A single `.agents/` folder acting as the unified source of truth. |
 
 **Solving vendor folder sprawl**
@@ -75,11 +81,12 @@ my-project/
 └── .agents/
     ├── skills/           # <--- Unified library (fully compatible with agentskills.io)
     │   ├── deploy/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── scripts/
     │   └── test/
     │       └── SKILL.md
-    ├── memory/
-    └── specs/
+    ├── context/          # (Project-wide context, distinct from skill-local refs)
+    └── memory/
 ```
 
 ---
@@ -110,6 +117,16 @@ You are a Senior Rust Engineer focused on safety and performance.
 ### 2. The `.agents` directory
 
 This directory organizes implementation details, allowing for progressive disclosure—loading only files necessary for the current task.
+
+#### `.agents/personas/`
+
+*Use for: Specialized roles.*
+Switch between different agent "hats" (e.g., `qa.md`, `architect.md`) by instructing the agent to load a specific persona file.
+
+#### `.agents/logs/`
+
+*Use for: Audit & Debugging.*
+A place to store session logs or agent thought traces for review, keeping the root clean.
 
 #### `.agents/memory/`
 
