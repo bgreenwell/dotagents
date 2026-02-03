@@ -124,5 +124,8 @@ Keep your database schemas, API specs, and current feature requirements organize
 **Should `.agents/` be committed?**
 Generally, yes. This context is valuable for team alignment. Personal preferences (e.g., `.agents/memory/user.md`) should usually be gitignored.
 
+**Is this related to `iannuttall/dotagents`?**
+While they share a name, they serve different purposes. [iannuttall/dotagents](https://github.com/iannuttall/dotagents) is a tool for managing personal agent configurations across projects via symlinks. This project is an **architectural standard** for organizing project-specific context within a repository.
+
 **Why use this standard?**
 It's about **efficiency** and **cleanliness**. It encourages referencing files only when needed ("context routing") and prevents the explosion of vendor-specific configuration folders in your project root.
