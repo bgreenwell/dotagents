@@ -11,14 +11,23 @@ if [[ ! -f "$agents_file" ]]; then
 fi
 
 routes="$(
-    LC_ALL=C grep -oE '\.agents/[A-Za-z0-9_./-]+' "$agents_file" \
-        | sed -E 's/[.,:;]+$//' \
+    LC_ALL=C awk '
+        {
+            line = $0
+            while (match(line, /`[^`]+`/)) {
+                print substr(line, RSTART + 1, RLENGTH - 2)
+                line = substr(line, RSTART + RLENGTH)
+            }
+        }
+    ' "$agents_file" \
+        | grep -E '^(\.?[A-Za-z0-9_-]+/)*[A-Za-z0-9_.-]+/?$' \
+        | grep -E '(/|\.md$)' \
         | sort -u \
         || true
 )"
 
 if [[ -z "$routes" ]]; then
-    printf 'Context routes valid (0 literal .agents paths checked).\n'
+    printf 'Context routes valid (0 literal project paths checked).\n'
     exit 0
 fi
 

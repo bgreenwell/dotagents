@@ -10,7 +10,7 @@ Use the established root `AGENTS.md` file as the only required entry point. It r
 
 ## 002. Recommend `.agents/` for routed project context
 
-Status: Accepted
+Status: Superseded by 004
 
 Recorded: 2026-07-24
 
@@ -23,3 +23,11 @@ Status: Accepted
 Recorded: 2026-07-24
 
 Examples in this repository must help maintain or validate the dotagents proposal. Avoid fictional application capabilities that cannot be exercised truthfully.
+
+## 004. Separate shared truth from agent-specific resources
+
+Status: Accepted
+
+Recorded: 2026-07-25
+
+Keep documentation, rules, specifications, and decisions that help both humans and agents in visible, conventional project locations. Reserve `.agents/` for resources whose purpose or format is specific to agents. `AGENTS.md` may route to both.

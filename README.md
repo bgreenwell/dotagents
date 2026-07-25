@@ -12,9 +12,9 @@ Single context files such as `AGENTS.md`, `CLAUDE.md`, and `.cursorrules` can be
 
 ## The proposal
 
-Use a concise root `AGENTS.md` as a router. It should direct agents to deeper project context only when a task requires it.
+Use a concise root `AGENTS.md` as a router. It should direct agents to existing human-facing project documentation and agent-specific resources only when a task requires them.
 
-The root file is the entry point. A hidden `.agents/` directory is the recommended home for routed context, but its categories are optional and projects may adapt them to their needs.
+Shared project truth remains in visible, conventional locations such as `README.md`, `CONTRIBUTING.md`, and `docs/`. The hidden `.agents/` directory is reserved for resources whose format or purpose is specific to agents.
 
 ### Self-hosting example
 
@@ -23,37 +23,46 @@ This repository uses dotagents to maintain the proposal itself:
 ```text
 .
 ├── AGENTS.md
+├── CONTRIBUTING.md
+├── README.md
+├── docs/
+│   ├── decisions.md
+│   ├── terminology.md
+│   └── specs/
+│       └── README.md
 └── .agents/
-    ├── context/
-    │   └── terminology.md
-    ├── memory/
-    │   └── decisions.md
     ├── personas/
     │   └── standards-reviewer.md
-    ├── rules/
-    │   └── documentation.md
-    ├── skills/
-    │   └── validate-context-routes/
-    │       ├── SKILL.md
-    │       └── scripts/
-    │           └── validate.sh
-    └── specs/
-        └── README.md
+    └── skills/
+        └── validate-context-routes/
+            ├── SKILL.md
+            └── scripts/
+                └── validate.sh
 ```
 
 Every checked-in example supports this proposal. The repository does not include fictional application schemas, migrations, or other capabilities that it cannot genuinely exercise.
 
-## Suggested categories
+## Shared project context
 
-- **`rules/`** — Project instructions that apply under conditions defined by the router.
-- **`context/`** — Stable, read-only reference material such as terminology, architecture, schemas, or interfaces.
-- **`memory/`** — Reviewed project decisions and durable knowledge.
-- **`personas/`** — Optional specialist review perspectives.
+Information useful to both humans and agents should keep its normal project location:
+
+- **`README.md`** — Project purpose, setup, and primary documentation.
+- **`CONTRIBUTING.md`** — Contribution workflow and shared coding or documentation rules.
+- **`docs/`** — Architecture, terminology, decisions, specifications, and other durable knowledge.
+- **Existing project conventions** — Tests, schemas, API definitions, and configuration should remain where the project and its human contributors expect them.
+
+Do not duplicate this material under `.agents/`. Route agents to the canonical source.
+
+## Agent-specific resources
+
+The optional `.agents/` directory may contain resources designed specifically for agent workflows:
+
+- **`personas/`** — Specialist perspectives an agent can adopt for a task.
 - **`skills/`** — Task-specific Agent Skills and their bundled resources.
-- **`specs/`** — Active requirements, proposals, and their index.
-- **`logs/`** — Optional generated execution records or audit summaries. Do not store hidden reasoning, secrets, or personal data.
+- **`settings/`** — Vendor-neutral agent configuration when a defined format exists.
+- **`memory/` and `logs/`** — Optional generated local state or execution summaries. These should normally be ignored by version control and must not contain secrets, personal data, or hidden reasoning.
 
-Categories do not load themselves. `AGENTS.md` must explain when an agent should read or use them.
+Directories do not load themselves. `AGENTS.md` must explain when an agent should read or use each resource.
 
 ## Root router example
 
@@ -62,9 +71,9 @@ Categories do not load themselves. `AGENTS.md` must explain when an agent should
 
 ## Context routing
 
-- Before changing documentation, read `.agents/rules/documentation.md`.
-- When making a structural decision, consult `.agents/memory/decisions.md`.
-- When working on an active proposal, check `.agents/specs/README.md`.
+- Before changing documentation, read `CONTRIBUTING.md`.
+- When making a structural decision, consult `docs/decisions.md`.
+- When reviewing the convention, adopt `.agents/personas/standards-reviewer.md`.
 ```
 
 This is progressive disclosure: the router remains small while task-specific context is loaded only when relevant.
@@ -76,7 +85,7 @@ dotagents and [Agent Skills](https://agentskills.io) are complementary:
 | | Agent Skills | dotagents |
 | --- | --- | --- |
 | Purpose | Defines the format of a task-specific skill | Proposes how project-wide agent context can be organized |
-| Scope | A `SKILL.md` file and its bundled resources | A project router and optional context categories |
+| Scope | A `SKILL.md` file and its bundled resources | A project router, existing shared documentation, and optional agent-specific resources |
 | Location | Determined by supporting clients and projects | Recommends project-local skills under `.agents/skills/` |
 
 A skill stored under `.agents/skills/` should still conform to the Agent Skills specification. The dotagents proposal does not redefine the `SKILL.md` format.
@@ -85,11 +94,11 @@ A skill stored under `.agents/skills/` should still conform to the Agent Skills 
 
 ### Is `.agents/` required?
 
-No. The root `AGENTS.md` is the entry point for this convention. `.agents/` is the recommended organization for deeper context.
+No. The root `AGENTS.md` is the entry point for this convention. `.agents/` is an optional location for agent-specific resources.
 
 ### Should `.agents/` be committed?
 
-Reviewed project context generally should be committed. Generated logs, personal preferences, credentials, secrets, and machine-local state should not be committed.
+Agent-specific skills, personas, and reviewed configuration may be committed. Generated logs, personal preferences, credentials, secrets, and machine-local state should not be committed. Shared project documentation belongs in its normal visible location.
 
 ### Why not use `.github/`?
 
