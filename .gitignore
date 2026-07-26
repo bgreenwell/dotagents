@@ -1,0 +1,3 @@
+# Agent-generated local state
+.agents/logs/
+.agents/memory/
