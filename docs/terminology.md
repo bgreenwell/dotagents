@@ -1,6 +1,6 @@
 # Terminology
 
-These definitions describe Draft 0.1.0 and are informative rather than a client protocol.
+These definitions describe the draft proposal and are informative rather than a client protocol.
 
 - **Router:** The root `AGENTS.md` file that directs an agent to additional context.
 - **Route:** A condition and project-relative path written in the router.

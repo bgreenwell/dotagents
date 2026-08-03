@@ -2,7 +2,7 @@
 
 **A directory-as-context convention for AI coding agents.**
 
-> **Status:** Proposal / Draft 0.1.0 (see [CHANGELOG.md](CHANGELOG.md))
+> **Status:** Draft Proposal (see [CHANGELOG.md](CHANGELOG.md) for version history)
 
 > **Inspiration:** Based on experience, emerging patterns in agentic coding, and [Issue #71 in agentsmd/agents.md](https://github.com/agentsmd/agents.md/issues/71).
 
@@ -112,4 +112,4 @@ They share a name but serve different purposes. [iannuttall/dotagents](https://g
 
 ### Is dotagents a client protocol?
 
-Not in Draft 0.1.0. It is a proposed repository convention. Clients still need to support `AGENTS.md` and follow the routes it contains.
+Not in the current draft. It is a proposed repository convention. Clients still need to support `AGENTS.md` and follow the routes it contains.
