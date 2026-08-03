@@ -9,6 +9,7 @@ Prioritize clarity, interoperability, safety, and consistency between the propos
 ## Context routing
 
 - **Before changing documentation or examples:** READ `CONTRIBUTING.md`.
+- **When checking release or version history:** READ `CHANGELOG.md`.
 - **When changing terminology or directory semantics:** READ `docs/terminology.md`.
 - **When making a structural or naming decision:** CONSULT `docs/decisions.md`.
 - **When working on an active proposal:** CHECK `docs/specs/README.md`.

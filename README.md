@@ -2,7 +2,7 @@
 
 **A directory-as-context convention for AI coding agents.**
 
-> **Status:** Proposal / Draft 0.1.0
+> **Status:** Proposal / Draft 0.1.0 (see [CHANGELOG.md](CHANGELOG.md))
 
 > **Inspiration:** Based on experience, emerging patterns in agentic coding, and [Issue #71 in agentsmd/agents.md](https://github.com/agentsmd/agents.md/issues/71).
 
@@ -23,6 +23,7 @@ This repository uses dotagents to maintain the proposal itself:
 ```text
 .
 ├── AGENTS.md
+├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── README.md
 ├── docs/
@@ -47,6 +48,7 @@ Every checked-in example supports this proposal. The repository does not include
 Information useful to both humans and agents should keep its normal project location:
 
 - **`README.md`** — Project purpose, setup, and primary documentation.
+- **`CHANGELOG.md`** — Version history, release notes, and proposal revisions.
 - **`CONTRIBUTING.md`** — Contribution workflow and shared coding or documentation rules.
 - **`docs/`** — Architecture, terminology, decisions, specifications, and other durable knowledge.
 - **Existing project conventions** — Tests, schemas, API definitions, and configuration should remain where the project and its human contributors expect them.
